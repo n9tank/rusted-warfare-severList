@@ -59,7 +59,7 @@ public class room implements Comparable<room> {
   String str=toString;
   if (str == null){
   StringBuilder buff=new StringBuilder(severName);
-  buff.append(severVer).append('(').append(players).append(+ '/').append(maxPlayes).append(')').append(map);
+  buff.append(severVer).append('(').append(players).append('/').append(maxPlayes).append(')').append(map);
  if(mods.length()>0)buff.append(';').append(mods);
  toString=str=buff.toString();   
   }

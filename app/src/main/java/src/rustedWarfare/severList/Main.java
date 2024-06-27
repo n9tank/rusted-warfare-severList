@@ -43,11 +43,8 @@ public class Main extends Activity implements OnItemClickListener, Thread.Uncaug
  public void finish() {
   moveTaskToBack(true);
  }
-  public static void e(Object cla, Throwable e) {
-  Log.e(packname, cla.toString(), e);
- }
  public void uncaughtException(Thread thread, Throwable ex) {
-  e(thread, ex);
+  Log.e(packname,thread.toString(), ex);
  }
  protected void onCreate(Bundle savedInstanceState) {
   packname=getPackageName();
