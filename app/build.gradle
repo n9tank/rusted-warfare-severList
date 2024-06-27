@@ -21,7 +21,7 @@ namespace 'rustedWarfare.severList'
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
         versionCode 1
-        versionName "0.2"
+        versionName "0.2.1"
     }
     buildTypes {
         release {

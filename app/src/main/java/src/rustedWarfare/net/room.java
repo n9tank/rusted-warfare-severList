@@ -57,7 +57,13 @@ public class room implements Comparable<room> {
  private String toString;
  public String toString() {
   String str=toString;
-  if (str == null)str = toString = severName + '(' + players + '/' + maxPlayes + ')' + map + 'v' + severVer;
+  if (str == null){
+  StringBuilder buff=new StringBuilder();
+  if(!sever.equals("Unnamed"))buff.append(sever).append(':');
+  buff.append(severName).append('(').append(players).append(+ '/').append(maxPlayes).append(')').append(map);
+ if(mods.length()>0)buff.append(';').append(mods);
+ toString=str=buff.toString();   
+  }
   return str;
  }
  public String getData() {
@@ -84,12 +90,10 @@ public class room implements Comparable<room> {
  public String getRealIp() {
   String ip=public_ip;
   if (ip != null)return ip;
-   Request request = new Request.Builder().url(severList.hostCahce)
-      .addHeader("User-Agent","rw " + severList.sys + " " + severList.ver + " " + severList.lang)
-      .addHeader("Language",severList.lang)
-    .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),getData())).build();
+   Request request = severList.setHeader(new Request.Builder().url(severList.hostCahce))
+   .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),getData())).build();
    try (Response response = severList.okhttp.newCall(request).execute()) {
-    if(response.code()==200)return readIo(response.body().charStream());
+  if(response.code()==200)return readIo(response.body().charStream());
    }catch(Exception e){
    }
   return null;

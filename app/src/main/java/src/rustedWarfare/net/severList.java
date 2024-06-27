@@ -34,6 +34,7 @@ public class severList {
   room.nat_ip = getIp(list);
   room.ip = list[4];
   room.severName = list[7];
+// room.passage=list[8].equals("true");
   room.map = list[9];
   String map_type=list[10];
   room.map_type = map_type.equals("skirmishMap") ?0: (map_type.equals("customMap") ?1: 2);
@@ -56,7 +57,7 @@ public class severList {
    tag:
    while ((str = buff.readLine()) != null) {
     String[] list=str.split(",");
-    if (Integer.parseInt(list[2]) == ver && list[6].equals("true") && !list[11].equals("ingame")) {
+    if (Integer.parseInt(list[2]) == ver && list[6].equals("true") && !list[8].equals("true") && !list[11].equals("ingame")) {
      room room=pareRoom(list);
      reslt.add(room);
     }
@@ -68,14 +69,15 @@ public class severList {
   Arrays.sort(arr);
   return arr;
  }
+  public static Request.Builder setHeader(Request.Builder request) {
+  return request.addHeader("User-Agent",new StringBuilder("rw ").append(severList.sys).append(" ").append(severList.ver).append(" ").append(severList.lang).toString()).addHeader("Language",lang);
+  }
  public static Object[] getList() {
   for (String src:host) {
   hostCahce=src;
-   Request request = new Request.Builder().url(src + "?action=list&game_version=" + ver + "&game_version_beta=" + beta)
-      .addHeader("User-Agent","rw " + sys + " " + ver + " " + lang)
-      .addHeader("Language",lang).get().build();
+   Request request = setHeader(new Request.Builder().url(new StringBuilder(src).append("?action=list&game_version=").append(ver).append("&game_version_beta=").append(beta).toString())).get().build();
    try (Response response = okhttp.newCall(request).execute()) {
-        if(response.code()==200)return readIo(response.body().charStream());
+    if(response.code()==200)return readIo(response.body().charStream());
    }catch(Exception e){
    }
   }
