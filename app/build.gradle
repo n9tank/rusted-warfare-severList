@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+}
+android {
+packagingOptions{
+      exclude "okhttp3/internal/publicsuffix/NOTICE"
+    }
+namespace 'rustedWarfare.severList'
+    compileSdkVersion 31
+    signingConfigs {
+        sign {
+            keyAlias '0'
+            keyPassword '0'
+            storeFile file('/sdcard/AppProjects/.jks')
+            storePassword '0'
+            }
+        }
+    defaultConfig {
+        applicationId "rustedWarfare.severList"
+        minSdkVersion 21
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 30
+        versionCode 1
+        versionName "0.2"
+    }
+    buildTypes {
+        release {
+        signingConfig signingConfigs.sign
+        shrinkResources true
+        minifyEnabled true
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
+        debug {
+        signingConfig signingConfigs.sign
+        }
+        compileOptions {
+			sourceCompatibility=JavaVersion.VERSION_1_8
+			targetCompatibility=JavaVersion.VERSION_1_8
+			}
+    }
+}
+
+dependencies {
+//implementation 'tech.kwik:flupke:0.5.3' 需要JDK11
+/*implementation 'com.google.net.cronet:cronet-okhttp:0.1.0' 需要google服务
+implementation "com.google.android.gms:play-services-cronet:18.0.1"*/
+implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+implementation fileTree(dir: "libs", include: ["*.jar"])
+}
