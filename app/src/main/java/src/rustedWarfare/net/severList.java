@@ -35,11 +35,12 @@ public class severList {
   room.ip = list[4];
   room.severName = list[7];
 // room.passage=list[8].equals("true");
-  room.map = list[9];
+  String map=list[9];
+  room.map = map.startsWith("MOD|")?map:map.substring(map.lastIndexOf('/')+1);
   String map_type=list[10];
   room.map_type = map_type.equals("skirmishMap") ?0: (map_type.equals("customMap") ?1: 2);
   //room.ingame = list[11].equals("ingame");
-  room.severVer = list[12].replace("1.15","");
+  room.severVer = list[12].replaceFirst("[\\d.]+","");
   room.players = Integer.parseInt(list[15]);
   room.maxPlayes = Integer.parseInt(list[16]);
   room.mods = list[20];
