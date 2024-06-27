@@ -30,7 +30,7 @@ public class severList {
  room room= new room();
   String uid=list[0];
   room.uuid = uid;
-  room.sever = list[1];
+  room.sever = list[1].trim();
   room.nat_ip = getIp(list);
   room.ip = list[4];
   room.severName = list[7];
@@ -39,7 +39,7 @@ public class severList {
   String map_type=list[10];
   room.map_type = map_type.equals("skirmishMap") ?0: (map_type.equals("customMap") ?1: 2);
   //room.ingame = list[11].equals("ingame");
-  room.severVer = list[12];
+  room.severVer = list[12].replace("1.15","");
   room.players = Integer.parseInt(list[15]);
   room.maxPlayes = Integer.parseInt(list[16]);
   room.mods = list[20];

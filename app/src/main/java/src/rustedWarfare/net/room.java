@@ -58,17 +58,15 @@ public class room implements Comparable<room> {
  public String toString() {
   String str=toString;
   if (str == null){
-  StringBuilder buff=new StringBuilder();
-  if(!sever.equals("Unnamed"))buff.append(sever).append(':');
-  buff.append(severName).append('(').append(players).append(+ '/').append(maxPlayes).append(')').append(map);
+  StringBuilder buff=new StringBuilder(severName);
+  buff.append(severVer).append('(').append(players).append(+ '/').append(maxPlayes).append(')').append(map);
  if(mods.length()>0)buff.append(';').append(mods);
  toString=str=buff.toString();   
   }
   return str;
  }
  public String getData() {
-  StringBuilder out=new StringBuilder();
-  out.append("action=get&game_id=");
+  StringBuilder out=new StringBuilder("action=get&game_id=");
   out.append(uuid);
   out.append("&c=");
   out.append(getMd5());
